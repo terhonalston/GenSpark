@@ -6,15 +6,21 @@ public class GuessTheNumber {
         Scanner read = new Scanner(System.in);
         Random random = new Random();
         int number = random.nextInt(20) + 1;
-
+        String name = "";
         int counter = 1;
         boolean guessIncorrect = true;
-        //getting the users name here.
-        System.out.println("Hello! What is your name?");
-        String name = read.next();
-        //this is where we start the guessing loop
-        System.out.println("Well " + name + " I'm thinking of a number between 1 and 20. \nTake a guess.");
+        //getting the users name here. Revised for JUnit testing.
+
+        System.out.println("Hello, what is your name?");
+        try {
+            name = read.next();
+            System.out.println(usersName(name));
+        }
+        catch (Exception nameError)
         {
+            System.out.println("Please enter your name.");
+        }
+        {//this is where we start the guessing loop
             while (guessIncorrect)
                 for (; counter <= 6; counter++)//6 attempts or fewer
                 {
@@ -45,7 +51,9 @@ public class GuessTheNumber {
             }
         }
 
-
+    public static String usersName(String name){
+        return "Well " + name + " I'm thinking of a number between 1 and 20. \nTake a guess.";
+    }
 
     //this method takes the user inputted guess and return whether it is too high, too low, or correct.
     public static String guessAndCheck(int guess, int number, String name, int counter) {
